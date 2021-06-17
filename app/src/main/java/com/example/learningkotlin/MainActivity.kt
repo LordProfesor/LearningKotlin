@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         //funciones()
         //clases()
         //nestedAndInnerClasses()
-        interfaces()
+        //interfaces()
+        funcionesAnonimas()
+
     }
 
     /*
@@ -176,4 +178,34 @@ class MainActivity : AppCompatActivity() {
         Log.i("-"," " + programador1.ponerAtrabajar())
         Log.i("-"," " + disenador1.ponerAtrabajar())
     }
+
+    /*
+    Trabajar con funciones anonimas
+    */
+   private fun funcionesAnonimas () {
+
+       //Esto es un hola mundo tradicional
+       fun holaMundo(){
+           println("Hola Mundo")
+       }
+       holaMundo()
+
+       //Cuando las funciones solo tienen una línea de código las podemos simplificar de la siguiente manera
+       fun holaMundoAlt() = println("Hola Mundo Alternativo")
+       holaMundoAlt()
+
+        //Las funciones anonimas son funciones que no tienen nombre, por este motivo para ser invocadas tienen que ser asignadas a una variable
+        val miFuncionAnonima = fun () = println("Hola Mundo Anonimo")
+        miFuncionAnonima.invoke()
+
+        //El siguiente ejemplo muestra cómo obtener un array con todos los numero pares desde 0 a un valor determinado.
+
+        val multiplicarPorDos = fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2
+
+        val arrayDepares = Array(20, multiplicarPorDos)
+    }
+
+
+
+
 }
