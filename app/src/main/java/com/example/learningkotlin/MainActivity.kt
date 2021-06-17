@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         //clases()
         //nestedAndInnerClasses()
         //interfaces()
-        funcionesAnonimas()
+        //funcionesAnonimas()
+        expresionesLamba()
 
     }
 
@@ -188,24 +189,50 @@ class MainActivity : AppCompatActivity() {
        fun holaMundo(){
            println("Hola Mundo")
        }
-       holaMundo()
+       //holaMundo()
 
        //Cuando las funciones solo tienen una línea de código las podemos simplificar de la siguiente manera
        fun holaMundoAlt() = println("Hola Mundo Alternativo")
-       holaMundoAlt()
+       //holaMundoAlt()
 
-        //Las funciones anonimas son funciones que no tienen nombre, por este motivo para ser invocadas tienen que ser asignadas a una variable
-        val miFuncionAnonima = fun () = println("Hola Mundo Anonimo")
-        miFuncionAnonima.invoke()
+       //Las funciones anonimas son funciones que no tienen nombre, por este motivo para ser invocadas tienen que ser asignadas a una variable
+       val miFuncionAnonima = fun () = println("Hola Mundo Anonimo")
+       //miFuncionAnonima.invoke()
 
-        //El siguiente ejemplo muestra cómo obtener un array con todos los numero pares desde 0 a un valor determinado.
+       //El siguiente ejemplo muestra cómo obtener un array con todos los numero pares desde 0 a un valor determinado.
+       val multiplicarPorDos = fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2
+       val arrayDepares = Array(10, multiplicarPorDos) //El segundo parametro del constructor del Array es una función anónima
+       val arrayDeparesAlt = Array(10, fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2)//Se podrías prescindir de la variable y pasar directamente la funcion completa
 
-        val multiplicarPorDos = fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2
+        arrayDepares.forEach{
+            println(it.toString())
+        }
 
-        val arrayDepares = Array(20, multiplicarPorDos)
+        arrayDeparesAlt.forEach{
+            println(it.toString())
+        }
+   }
+
+    /*
+    Trabajar con expresiones Lambda
+    */
+    fun expresionesLamba(){
+
+        //Siguiendo con el ejemplo anterior, haremos la transformación de la última funcion anonima en una expresion Lambda
+        val arrayDeParesAlt = Array(10, {numeroAMultiplicar -> numeroAMultiplicar * 2})
+
+        arrayDeParesAlt.forEach{
+            println(it.toString())
+        }
+
     }
 
 
 
-
 }
+
+
+
+
+
+
