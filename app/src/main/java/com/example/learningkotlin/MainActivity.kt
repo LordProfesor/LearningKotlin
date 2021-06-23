@@ -3,12 +3,21 @@ package com.example.learningkotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+    var testTextView : TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val destroyButton = findViewById<Button>(R.id.destroyButton)
+        testTextView = findViewById<TextView>(R.id.testTextView)
 
         //nullableAndNotNullable()
         //strings()
@@ -20,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         //nestedAndInnerClasses()
         //interfaces()
         //funcionesAnonimas()
-        expresionesLamba()
+        //expresionesLamba()
+        botones(destroyButton)
+
+
 
     }
 
@@ -195,14 +207,17 @@ class MainActivity : AppCompatActivity() {
        fun holaMundoAlt() = println("Hola Mundo Alternativo")
        //holaMundoAlt()
 
-       //Las funciones anonimas son funciones que no tienen nombre, por este motivo para ser invocadas tienen que ser asignadas a una variable
+       //Las funciones anonimas son funciones que no tienen nombre, por este motivo para ser invocadas tienen que ser asignadas a una variable e invocadas
        val miFuncionAnonima = fun () = println("Hola Mundo Anonimo")
        //miFuncionAnonima.invoke()
 
-       //El siguiente ejemplo muestra cómo obtener un array con todos los numero pares desde 0 a un valor determinado.
+       //El siguiente ejemplo muestra cómo obtener un array con todos los numero pares desde 0 a un valor determinado, partiendo de una funcion anonima.
        val multiplicarPorDos = fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2
-       val arrayDepares = Array(10, multiplicarPorDos) //El segundo parametro del constructor del Array es una función anónima
-       val arrayDeparesAlt = Array(10, fun (numeroAMultiplicar : Int) : Int = numeroAMultiplicar * 2)//Se podrías prescindir de la variable y pasar directamente la funcion completa
+       //se puede omitir el return porque este este se da por hecho. De la misma manera podríamos omitir el tipo de dato devuelto, ya que este es inferido.
+       val multiplicarPorDosAlt = fun (numeroAMultiplicar : Int) = numeroAMultiplicar * 2
+
+       val arrayDepares = Array(10, multiplicarPorDosAlt) //El segundo parametro del constructor del Array es la funcion anonima usada anteriormente
+       val arrayDeparesAlt = Array(10, fun (numeroAMultiplicar : Int) = numeroAMultiplicar * 2)//Se podrías prescindir de la variable y pasar directamente la funcion completa
 
         arrayDepares.forEach{
             println(it.toString())
@@ -227,10 +242,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun botones (button : Button){
 
+        //La manera tradicional de hacer click en un boton tal y como hemos hecho siempre es mediante el uso de la interfaz OnClickLister y la definicion de su método onClick
+        /*button.setOnClickListener(object : View.OnClickListener { //object es la representacion que hace kotlin de un objeto genérico. En este caso representa a un objeto de la interfaz OnClickListener
+            override fun onClick(v: View?) {
+                testTextView?.text = "Hola destructor de mundos"
+            }
+        })*/
 
+        //Al ser una interfaz funcional, es decir, una interfaz que solo tiene un método a definir, podemos usar notación lambda para representarla, de la siguiente manera:
+        //El método onCLick de la interfaz funcional OnClickListener no recibe ni devuelve nada, por lo tanto la expresión Lambda quedará vacía.
+        button.setOnClickListener {
+            testTextView?. text = "Hola destructor de mundos lambda"
+        }
 
-
+    }
 }
 
 
