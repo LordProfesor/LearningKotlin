@@ -229,34 +229,54 @@ class MainActivity : AppCompatActivity() {
    }
 
     /*
-    Trabajar con expresiones Lambda
+    Trabajar con expresiones Lambda : Funciones que pueden trabajar internamente con otras funciones
     */
     fun expresionesLamba(){
 
         //Siguiendo con el ejemplo anterior, haremos la transformación de la última funcion anonima en una expresion Lambda
         val arrayDeParesAlt = Array(10, {numeroAMultiplicar -> numeroAMultiplicar * 2})
+        //Otra manera de hacerlo sería con el parámetro it que sería lo mismo pero hace referencia directamente a cada uno de los valores del array (salvando las distancias, sería algo como this)
+        val arrayDeParesAltIt = Array(10, {it * 2})
 
         arrayDeParesAlt.forEach{
             println(it.toString())
         }
 
+        arrayDeParesAltIt.forEach{
+            println(it.toString())
+        }
+
+        //Otro ejemplo podría ser un filtrado de los elementos de un Array, en el que a cada uno de los elementos del array tiene que pasar por una determinada funcion de
+        //comprobación, es decir, un PREDICADO. Esto nos devolverá un tipo bool para decidir que elementos pasan a la segunda lista.
+        var arrayDeEnteros = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        var myFilterArrayDeEnteros = arrayDeEnteros.filter { it > 5 }
+
+        myFilterArrayDeEnteros.forEach{
+            println(it.toString())
+        }
     }
 
     fun botones (button : Button){
 
         //La manera tradicional de hacer click en un boton tal y como hemos hecho siempre es mediante el uso de la interfaz OnClickLister y la definicion de su método onClick
+
         /*button.setOnClickListener(object : View.OnClickListener { //object es la representacion que hace kotlin de un objeto genérico. En este caso representa a un objeto de la interfaz OnClickListener
             override fun onClick(v: View?) {
                 testTextView?.text = "Hola destructor de mundos"
             }
         })*/
 
-        //Al ser una interfaz funcional, es decir, una interfaz que solo tiene un método a definir, podemos usar notación lambda para representarla, de la siguiente manera:
-        //El método onCLick de la interfaz funcional OnClickListener no recibe ni devuelve nada, por lo tanto la expresión Lambda quedará vacía.
+        //Al ser una interfaz funcional, es decir, una interfaz que solo tiene un método a definir, podemos usar notación lambda para representarla.
+        //El método onCLick de la interfaz funcional OnClickListener recibe un view por parametro  y no devuelve nada, por lo tanto la expresión Lambda
+        //la podemos representar de las siguientes formas:
+
+        /*button.setOnClickListener {button ->
+            testTextView?. text = "Hola destructor de mundos lambda"
+        }*/
+
         button.setOnClickListener {
             testTextView?. text = "Hola destructor de mundos lambda"
         }
-
     }
 }
 
