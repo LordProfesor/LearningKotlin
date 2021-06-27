@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             mi_variable = 0
         }
-        //Safety Call (Elvis Operator), lo mismo que antes pero en Kotlin
+        //Safety Call (Elvis Operator), lo mismo que antes pero en Kotlin. En caso de ser nula le setea un 0, en caso de no serlo, le asigna la longitud
         mi_variable = mi_variable_nula?.length ?: 0
 
     /*
