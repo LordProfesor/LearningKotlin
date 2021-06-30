@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         //nullableAndNotNullable()
         //strings()
-        //arrays()
+        arrays()
         //mapsAndHash()
         //testeandoEnums()
         //funciones()
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         //interfaces()
         //funcionesAnonimas()
         //expresionesLamba()
-        botones(destroyButton)
+        //botones(destroyButton)
 
 
 
@@ -91,9 +91,13 @@ class MainActivity : AppCompatActivity() {
         datosBrais.addAll(listOf<String>("19","Agosto","1988")) //con el método addAll podemos añadir de una única vez varios elementos más al array
         println(datosBrais);
 
-        var primerDatoDelArray = datosBrais[0] //En kotlin los arrays empiezan en 0
+        var primerDatoDelArray = datosBrais.get(0) //En kotlin los arrays empiezan en 0
         datosBrais.removeAt(3) //Con esta linea borramos el elemento que se encuentra en la posición 3 del array
         println(datosBrais);
+
+        for(i in 0 until datosBrais.size) {
+            println("Este es uno de los valores que tiene el array: " + datosBrais.get(i))
+        }
 
         datosBrais.forEach {
             println("Este es uno de los valores que tiene el array: " + it); //La variable it contiene cada uno de los valores del array
@@ -163,6 +167,10 @@ class MainActivity : AppCompatActivity() {
     private fun clases(){
         var myFirstUser : User = User("Brais", 32);
         var mySecondUser : User = User("Brais", 32, "32700600Z");
+        var usuarios = arrayListOf<User>()
+        usuarios.add(myFirstUser)
+        usuarios.add(mySecondUser)
+
     }
 
     /*
