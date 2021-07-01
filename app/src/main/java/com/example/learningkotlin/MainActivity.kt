@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val destroyButton = findViewById<Button>(R.id.destroyButton)
+        val changeTextButton = findViewById<Button>(R.id.changeTextButton)
         testTextView = findViewById<TextView>(R.id.testTextView)
 
         //nullableAndNotNullable()
@@ -30,10 +30,7 @@ class MainActivity : AppCompatActivity() {
         //interfaces()
         //funcionesAnonimas()
         //expresionesLamba()
-        //botones(destroyButton)
-
-
-
+        botones(changeTextButton)
     }
 
     /*
@@ -165,11 +162,12 @@ class MainActivity : AppCompatActivity() {
     Trabajar con clases
     */
     private fun clases(){
-        var myFirstUser : User = User("Brais", 32);
-        var mySecondUser : User = User("Brais", 32, "32700600Z");
+        var myFirstUser = User("Brais", 32);
+        var mySecondUser = User("Brais", 32, "32700600Z");
         var usuarios = arrayListOf<User>()
         usuarios.add(myFirstUser)
         usuarios.add(mySecondUser)
+
 
     }
 
