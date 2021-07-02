@@ -1,5 +1,6 @@
 package com.example.learningkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,15 +18,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val changeTextButton = findViewById<Button>(R.id.changeTextButton)
+        val openListViewButton = findViewById<Button>(R.id.openListViewButton)
         testTextView = findViewById<TextView>(R.id.testTextView)
+
+        openListViewButton.setOnClickListener {
+            val intent = Intent(applicationContext, ListViewActivity::class.java)
+            startActivity(intent)
+        }
 
         //nullableAndNotNullable()
         //strings()
-        arrays()
+        //arrays()
         //mapsAndHash()
         //testeandoEnums()
         //funciones()
-        //clases()
+        clases()
         //nestedAndInnerClasses()
         //interfaces()
         //funcionesAnonimas()
@@ -162,13 +169,11 @@ class MainActivity : AppCompatActivity() {
     Trabajar con clases
     */
     private fun clases(){
-        var myFirstUser = User("Brais", 32);
-        var mySecondUser = User("Brais", 32, "32700600Z");
-        var usuarios = arrayListOf<User>()
-        usuarios.add(myFirstUser)
-        usuarios.add(mySecondUser)
+        var myFirstUser = User("Brais", 32, "32789654", "Alemana",null )
+        var mySecondUser = User("Brais", 32, "32700600Z")
 
-
+        println(myFirstUser.toString())
+        println(mySecondUser.toString())
     }
 
     /*
