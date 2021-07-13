@@ -8,5 +8,9 @@ data class User(var nombre : String, var edad : Int, var dni : String,
 
     }
 
+    //Esto sería una constante accesible desde fuera de la clase, el equivalente en JAVA a static final
+    companion object {
+        const val CODIGO_USUARIOS= 10
+    }
 
 }

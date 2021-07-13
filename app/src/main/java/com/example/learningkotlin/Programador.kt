@@ -12,4 +12,5 @@ class Programador(nombre : String, edad : Int, salario : Float, lenguajes : Arra
     override fun ponerAtrabajar() : String {
         return ("El programador $nombre está programando")
     }
+
 }

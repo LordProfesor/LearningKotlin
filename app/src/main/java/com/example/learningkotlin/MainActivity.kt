@@ -174,6 +174,10 @@ class MainActivity : AppCompatActivity() {
 
         println(myFirstUser.toString())
         println(mySecondUser.toString())
+
+        //Accedemos a una constante de la clase USER
+        val constante = User.CODIGO_USUARIOS
+        println(constante.toString())
     }
 
     /*
