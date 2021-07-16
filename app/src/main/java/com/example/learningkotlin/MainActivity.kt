@@ -1,12 +1,14 @@
 package com.example.learningkotlin
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.net.toUri
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -32,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         //mapsAndHash()
         //testeandoEnums()
         //funciones()
-        clases()
+        //clases()
         //nestedAndInnerClasses()
         //interfaces()
         //funcionesAnonimas()
         //expresionesLamba()
-        botones(changeTextButton)
+        //botones(changeTextButton)
     }
 
     /*
@@ -171,7 +173,6 @@ class MainActivity : AppCompatActivity() {
     private fun clases(){
         var myFirstUser = User("Brais", 32, "32789654", "Alemana",null )
         var mySecondUser = User("Brais", 32, "32700600Z")
-
         println(myFirstUser.toString())
         println(mySecondUser.toString())
 
@@ -271,6 +272,45 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    Trabajar con botones e INTENTS : Funcion que trabaja con botones desde el punto de vista del XML
+    */
+
+    fun callOpenMap (view : View){
+        showMap("geo:47.6,-122.3".toUri())
+    }
+
+    fun callComposeEmail (view : View){
+        var emailAddressList = arrayOf("brais.88@gmail.com")
+        var subject = "Urgente para Brais"
+        var body = "Este es el mensaje URGENTE para Brais: Acude a la sala de profesores con rapidez"
+        composeEmail(emailAddressList, subject, body)
+    }
+
+    fun showMap(geoLocation: Uri) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = geoLocation
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
+    }
+
+    fun composeEmail(addresses: Array<String>, subject: String, body: String) {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // only email apps should handle this
+            putExtra(Intent.EXTRA_EMAIL, addresses)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
+    }
+
+    /*
+    Trabajar con botones : Funcion que trabaja con botones desde el punto de vista de interfaz tradicional y desde el punto de vista de las expresiones Lambda
+    */
     fun botones (button : Button){
 
         //La manera tradicional de hacer click en un boton tal y como hemos hecho siempre es mediante el uso de la interfaz OnClickLister y la definicion de su método onClick

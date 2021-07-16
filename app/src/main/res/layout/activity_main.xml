@@ -25,5 +25,18 @@
         android:layout_height="wrap_content"
         android:text="OpenListView" />
 
+    <Button
+        android:id="@+id/buttonOpenMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OpenMap"
+        android:onClick="callOpenMap"/>
+
+    <Button
+        android:id="@+id/buttonSendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Email"
+        android:onClick="callComposeEmail"/>
 
 </LinearLayout>
