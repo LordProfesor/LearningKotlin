@@ -19,18 +19,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val changeTextButton = findViewById<Button>(R.id.changeTextButton)
-        val openListViewButton = findViewById<Button>(R.id.openListViewButton)
-        testTextView = findViewById<TextView>(R.id.testTextView)
-
-        openListViewButton.setOnClickListener {
-            val intent = Intent(applicationContext, ListViewActivity::class.java)
-            startActivity(intent)
-        }
-
         //nullableAndNotNullable()
         //strings()
-        //arrays()
+        arrays()
         //mapsAndHash()
         //testeandoEnums()
         //funciones()
@@ -101,10 +92,21 @@ class MainActivity : AppCompatActivity() {
         datosBrais.removeAt(3) //Con esta linea borramos el elemento que se encuentra en la posición 3 del array
         println(datosBrais);
 
+        //Recorremos el array con un bucle for con indices
         for(i in 0 until datosBrais.size) {
             println("Este es uno de los valores que tiene el array: " + datosBrais.get(i))
         }
+         //Recorremos el array con un bluce for con indices pero invertido
+        for (i in (datosBrais.size-1).downTo(0)){
+            println("Este es uno de los valores que tiene el array: " + datosBrais.get(i))
+        }
 
+        //Recorremos el array con un bucle for sin indices
+        for(dato in datosBrais){
+            println("Este es uno de los valores que tiene el array: $dato")
+        }
+
+        //Recorremos el array con un forEach con expresiones lambda
         datosBrais.forEach {
             println("Este es uno de los valores que tiene el array: " + it); //La variable it contiene cada uno de los valores del array
         }
@@ -273,43 +275,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-    Trabajar con botones e INTENTS : Funcion que trabaja con botones desde el punto de vista del XML
-    */
-
-    fun callOpenMap (view : View){
-        showMap("geo:47.6,-122.3".toUri())
-    }
-
-    fun callComposeEmail (view : View){
-        var emailAddressList = arrayOf("brais.88@gmail.com")
-        var subject = "Urgente para Brais"
-        var body = "Este es el mensaje URGENTE para Brais: Acude a la sala de profesores con rapidez"
-        composeEmail(emailAddressList, subject, body)
-    }
-
-    fun showMap(geoLocation: Uri) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = geoLocation
-        }
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
-    }
-
-    fun composeEmail(addresses: Array<String>, subject: String, body: String) {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:") // only email apps should handle this
-            putExtra(Intent.EXTRA_EMAIL, addresses)
-            putExtra(Intent.EXTRA_SUBJECT, subject)
-            putExtra(Intent.EXTRA_TEXT, body)
-        }
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
-    }
-
-    /*
-    Trabajar con botones : Funcion que trabaja con botones desde el punto de vista de interfaz tradicional y desde el punto de vista de las expresiones Lambda
+    Funcion que trabaja con botones desde el punto de vista de interfaz tradicional y desde el punto de vista de las expresiones Lambda como complemento al apartado anterior
     */
     fun botones (button : Button){
 
