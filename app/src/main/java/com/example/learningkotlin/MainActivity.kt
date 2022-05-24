@@ -7,21 +7,24 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FuncionesDeSuspensionWithCallBack {
 
     var testTextView : TextView? = null
+    lateinit var progressBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        progressBar = findViewById(R.id.progressBar)
 
         //nullableAndNotNullable()
         //strings()
-        arrays()
+        //arrays()
         //mapsAndHash()
         //testeandoEnums()
         //funciones()
@@ -31,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         //funcionesAnonimas()
         //expresionesLamba()
         //botones(changeTextButton)
+        //testFuncionesDeSuspensionWithCallback()
+        testFuncionesDeSuspensionWithLambda()
     }
 
     /*
@@ -108,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         //Recorremos el array con un forEach con expresiones lambda
         datosBrais.forEach {
-            println("Este es uno de los valores que tiene el array: " + it); //La variable it contiene cada uno de los valores del array
+            println("Este es uno de los valores que tiene el array: " + it) //La variable it contiene cada uno de los valores del array
         }
     }
 
@@ -251,9 +256,11 @@ class MainActivity : AppCompatActivity() {
     */
     fun expresionesLamba(){
 
-        //Siguiendo con el ejemplo anterior, haremos la transformación de la última funcion anonima en una expresion Lambda
+        //Siguiendo con el ejemplo anterior, haremos la transformación de la última funcion anonima
+        //en una expresion Lambda
         val arrayDeParesAlt = Array(10, {numeroAMultiplicar -> numeroAMultiplicar * 2})
-        //Otra manera de hacerlo sería con el parámetro it que sería lo mismo pero hace referencia directamente a cada uno de los valores del array (salvando las distancias, sería algo como this)
+        //Otra manera de hacerlo sería con el parámetro it que sería lo mismo pero hace referencia
+        //directamente a cada uno de los valores del array (salvando las distancias, sería algo como this)
         val arrayDeParesAltIt = Array(10, {it * 2})
 
         arrayDeParesAlt.forEach{
@@ -264,8 +271,10 @@ class MainActivity : AppCompatActivity() {
             println(it.toString())
         }
 
-        //Otro ejemplo podría ser un filtrado de los elementos de un Array, en el que a cada uno de los elementos del array tiene que pasar por una determinada funcion de
-        //comprobación, es decir, un PREDICADO. Esto nos devolverá un tipo bool para decidir que elementos pasan a la segunda lista.
+        //Otro ejemplo podría ser un filtrado de los elementos de un Array, en el que a cada
+        //uno de los elementos del array tiene que pasar por una determinada funcion de
+        //comprobación, es decir, un PREDICADO. Esto nos devolverá un tipo bool para decidir
+        //que elementos pasan a la segunda lista.
         var arrayDeEnteros = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         var myFilterArrayDeEnteros = arrayDeEnteros.filter { it > 5 }
 
@@ -275,7 +284,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-    Funcion que trabaja con botones desde el punto de vista de interfaz tradicional y desde el punto de vista de las expresiones Lambda como complemento al apartado anterior
+    Funcion que trabaja con botones desde el punto de vista de interfaz tradicional y desde
+    el punto de vista de las expresiones Lambda como complemento al apartado anterior
     */
     fun botones (button : Button){
 
@@ -297,6 +307,32 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             testTextView?. text = "Hola destructor de mundos lambda"
+        }
+    }
+
+    /*
+    Bloque para trabajar con funciones de suspensión, asincronía, hilos y corutinas
+    */
+    /////////////////////////////////////////////////////////////////////////
+    fun testFuncionesDeSuspensionWithCallback(){
+        Log.e("Test", "Llamando a tarea pesada con callback")
+        FuncionesDeSuspensionWithCallBack.doHeavyTaskWithCallBack(4000, this)
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun callback(respuesta: String) {
+        progressBar.visibility = View.INVISIBLE
+        Log.e("Volviendo de tarea pesada con callback con esta respuesta ", respuesta)
+    }
+    //////////////////////////////////////////////////////////////////////////
+
+    fun testFuncionesDeSuspensionWithLambda(){
+        Log.e("Test", "Llamando a tarea pesada con lambda")
+
+        //Llamamos a la funcion pasando por parámetro el tiempo y otra función tal y como se refleja en
+        //el método doHeavyTaskWithLambda de la clase FuncionesDeSuspensionWithLambda
+        FuncionesDeSuspensionWithLambda.doHeavyTaskWithLambda(5000) {
+            Log.e("Volviendo de tarea pesada con lambda con esta respuesta ", it)
         }
     }
 }
