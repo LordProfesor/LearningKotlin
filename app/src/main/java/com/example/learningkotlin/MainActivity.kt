@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity(), FuncionesDeSuspensionWithCallBack {
         //expresionesLamba()
         //botones(changeTextButton)
         //testFuncionesDeSuspensionWithCallback()
-        testFuncionesDeSuspensionWithLambda()
+        //testFuncionesDeSuspensionWithLambda()
+        testLet()
     }
 
     /*
@@ -334,6 +335,16 @@ class MainActivity : AppCompatActivity(), FuncionesDeSuspensionWithCallBack {
         FuncionesDeSuspensionWithLambda.doHeavyTaskWithLambda(5000) {
             Log.e("Volviendo de tarea pesada con lambda con esta respuesta ", it)
         }
+    }
+
+    /*
+    Minibloque para entender el Let
+    En Kotlin, es común usar let para ejecutar código si un object ( let receiver) no es null,
+    como alternativa a una verificación if != null , como se muestra a continuación:
+    */
+    private fun testLet(){
+        val nullable: String? = "anything"
+        nullable?.let { println(it) }
     }
 }
 
